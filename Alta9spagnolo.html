@@ -3,18 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hotel Altavilla9 · Información</title>
+  <title>Altavilla9 info</title>
+  <link rel="icon" type="image/png" href="Altavilla9.png">
+  <link rel="apple-touch-icon" href="Altavilla9.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&display=swap">
   <style>
-    /* ▼ FONT MILESTONE: metti il file del font nella stessa cartella e controlla il nome qui sotto ▼ */
-    @font-face {
-      font-family: "Milestone One";
-      src: local("Milestone One"), local("MilestoneOne"),
-           url("MilestoneOne.woff2") format("woff2"),
-           url("MilestoneOne.ttf") format("truetype"),
-           url("MilestoneOne.otf") format("opentype");
-      font-display: swap;
-    }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     /* Altezza della barra superiore (usata anche per far partire lo sfondo sotto di essa) */
@@ -25,11 +20,15 @@
       /* Colore di riserva: viene sostituito in automatico dal colore della parte bassa dell'immagine (vedi script in fondo) */
       --colore-fondo: #7a6a58;
 
-      /* ▼ COLORI: oro della scritta Altavilla9 e tono chiaro abbinato per barra e riquadri ▼ */
-      --oro: #BDA133;                        /* colore della scritta Altavilla9, delle cornici e dei filetti */
-      --oro-scuro: #8A6F1A;                  /* oro più scuro per frecce, link e dettagli (si legge meglio) */
-      --pannello: rgba(252, 247, 229, 0.75); /* avorio chiaro appena dorato, 0.75 = 25% di trasparenza */
-      --testo: #3A2E12;                      /* colore dei titoli delle sezioni */
+      /* ▼ COLORI (uguali alla pagina index) ▼ */
+      --oro: #BDA133;                        /* cornici e filetti */
+      --oro-chiaro: #D8BE62;                 /* oro per frecce, link e dettagli: si legge bene sul verde scuro */
+      /* Verde profondo con riflesso diagonale, sempre trasparente (0.75 = 25% di trasparenza) */
+      --pannello: linear-gradient(135deg,
+                    rgba(14, 58, 50, 0.75) 0%,
+                    rgba(9, 46, 40, 0.75) 45%,
+                    rgba(4, 32, 28, 0.75) 100%);
+      --testo: #F6F0DC;                      /* avorio chiaro: testi leggibili sul verde scuro */
     }
 
     /* Questo colore riempie tutto lo schermo, anche sotto la barra del browser del telefono */
@@ -51,7 +50,7 @@
 
     body {
       font-family: Georgia, "Times New Roman", serif;
-      color: #2b2118;
+      color: var(--testo);
       min-height: 100vh;
       padding: calc(var(--barra) + 24px) 20px 40px;
     }
@@ -77,19 +76,27 @@
     }
 
     .barra img {
-      height: 78px;
-      width: 68px;
+      height: 90px;
+      width: 90px;
+      object-fit: contain;
       display: block;
     }
 
     .barra h1 {
-      font-family: "Milestone One", "Milestone", Georgia, "Times New Roman", serif;
-      font-size: 2.8rem;
-      font-weight: normal;
-      letter-spacing: 0.03em;
+      font-family: "Cinzel", "Trajan Pro", Georgia, "Times New Roman", serif;
+      font-size: 2.1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
       line-height: 1.1;
-      color: var(--oro);
-      text-shadow: 0 1px 1px rgba(90, 70, 10, 0.35); /* leggera ombra per leggere meglio l'oro sul fondo chiaro */
+      white-space: nowrap;
+      color: #D4B85A; /* oro di riserva */
+      /* effetto oro metallico in rilievo */
+      background: linear-gradient(180deg, #F1E3AE 0%, #D2B65A 45%, #9A7B2A 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.55));
     }
 
     /* Freccia "indietro" a sinistra nella barra */
@@ -104,8 +111,8 @@
       align-items: center;
       justify-content: center;
       border-radius: 50%;
-      color: var(--oro-scuro);
-      background: rgba(255, 255, 255, 0.35);
+      color: var(--oro-chiaro);
+      background: rgba(255, 255, 255, 0.12);
       transition: background 0.2s;
     }
 
@@ -113,8 +120,8 @@
 
     .indietro:hover,
     .indietro:focus-visible {
-      background: rgba(255, 255, 255, 0.8);
-      outline: 2px solid var(--oro-scuro);
+      background: rgba(255, 255, 255, 0.25);
+      outline: 2px solid var(--oro-chiaro);
       outline-offset: 1px;
     }
 
@@ -133,7 +140,7 @@
       margin: 0 auto;
     }
 
-    /* Link Google (recensioni) */
+    /* Link recensioni */
     .recensione {
       display: flex;
       align-items: center;
@@ -152,13 +159,13 @@
       color: var(--testo);
       text-decoration: none;
       font-size: 1.25rem;
-      transition: background 0.2s;
+      transition: filter 0.2s;
     }
 
     .recensione:hover,
     .recensione:focus-visible {
-      background: rgba(255, 252, 240, 0.92);
-      outline: 2px solid var(--oro-scuro);
+      filter: brightness(1.35);
+      outline: 2px solid var(--oro-chiaro);
       outline-offset: 2px;
     }
 
@@ -195,15 +202,15 @@
       color: var(--testo);
     }
 
-    .voce-titolo:hover { background: rgba(255, 255, 255, 0.3); }
-    .voce-titolo:focus-visible { outline: 2px solid var(--oro-scuro); outline-offset: -2px; }
+    .voce-titolo:hover { background: rgba(255, 255, 255, 0.1); }
+    .voce-titolo:focus-visible { outline: 2px solid var(--oro-chiaro); outline-offset: -2px; }
 
     /* Freccia: punta verso la scritta (destra) e ruota in senso orario fino a puntare in basso */
     .freccia {
       flex: 0 0 auto;
       width: 26px;
       height: 26px;
-      color: var(--oro-scuro);
+      color: var(--oro-chiaro);
       transition: transform 0.35s ease;
     }
 
@@ -239,8 +246,8 @@
     .tappe li {
       margin: 0 0 10px;
       padding: 12px 16px 14px;
-      background: rgba(255, 255, 255, 0.45);
-      border: 2px solid var(--oro); /* Bordo completo, dello stesso colore della scritta */
+      background: rgba(0, 0, 0, 0.22);
+      border: 2px solid var(--oro);
       border-radius: 8px;
       font-size: 1.02rem;
       line-height: 1.55;
@@ -262,12 +269,12 @@
       padding: 2px 12px;
       border-radius: 999px;
       background: rgba(189, 161, 51, 0.22);
-      color: var(--oro-scuro);
+      color: var(--oro-chiaro);
       font-size: 0.9rem;
       font-weight: bold;
     }
 
-    .credenziali a { color: var(--oro-scuro); }
+    .credenziali a { color: var(--oro-chiaro); }
 
     /* Nota sotto lo username del Wi-Fi */
     .credenziali .nota {
@@ -279,8 +286,8 @@
     }
 
     .credenziali {
-      background: rgba(255, 255, 255, 0.55);
-      border: 2px solid var(--oro); /* Bordo completo, dello stesso colore della scritta */
+      background: rgba(0, 0, 0, 0.22);
+      border: 2px solid var(--oro);
       border-radius: 6px;
       padding: 12px 16px;
       margin: 4px 0 14px;
@@ -301,17 +308,17 @@
       position: relative;
       overflow: hidden;
       border-radius: 10px;
-      background: rgba(255, 255, 255, 0.45);
-      border: 2px solid var(--oro); /* Cornice dello stesso colore della scritta HOTEL ALTAVILLA9 */
+      background: rgba(0, 0, 0, 0.22);
+      border: 2px solid var(--oro);
       display: grid;
       place-items: center;
       text-align: center;
       font-size: 0.9rem;
-      color: var(--oro-scuro);
+      color: var(--oro-chiaro);
       padding: 8px;
     }
 
-    .foto::before { content: "Inserte aquí la imagen"; }
+    .foto::before { content: "Insertar imagen aquí"; }
 
     .una .foto { aspect-ratio: 16 / 9; }
 
@@ -324,7 +331,7 @@
       display: block;
     }
 
-    /* Immagine cliccabile (es. Wi-Fi) */
+    /* Immagine cliccabile */
     .foto a {
       position: absolute;
       inset: 0;
@@ -332,7 +339,7 @@
       cursor: pointer;
     }
 
-    .foto a:focus-visible { outline: 3px solid var(--oro-scuro); outline-offset: -3px; }
+    .foto a:focus-visible { outline: 3px solid var(--oro-chiaro); outline-offset: -3px; }
 
     /* ===== TELEFONO ===== */
     @media (max-width: 480px) {
@@ -340,8 +347,8 @@
       body { padding: calc(var(--barra) + 16px) 12px 28px; }
       .barra { gap: 10px; padding: 0 12px; }
       .marchio { gap: 10px; }
-      .barra img { height: 54px; width: 44px; }
-      .barra h1 { font-size: 1.45rem; }
+      .barra img { height: 54px; width: 54px; }
+      .barra h1 { font-size: 0.95rem; letter-spacing: 0.04em; }
       .indietro { left: 6px; width: 34px; height: 34px; }
       .indietro svg { width: 22px; height: 22px; }
       .recensione { font-size: 1.05rem; padding: 10px 18px; gap: 10px; }
@@ -360,9 +367,9 @@
       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </a>
 
-    <a class="marchio" href="index.html" aria-label="Volver a la página de inicio">
-      <img src="Altavilla9.png" alt="Logotipo del Hotel Altavilla Roma">
-      <h1>Hotel Altavilla9</h1>
+    <a class="marchio" href="index.html" aria-label="Volver a la página principal">
+      <img src="Altavilla9.png" alt="Logo Hotel Altavilla Roma" onerror="this.onerror=null;this.src='Altavilla.png'">
+      <h1>Hotel Altavilla 9</h1>
     </a>
   </header>
 
@@ -392,7 +399,6 @@
       <span>Deja una reseña en Google</span>
     </a>
 
-
     <div class="riquadro">
 
       <!-- ===== WI-FI ===== -->
@@ -406,10 +412,10 @@
             <div class="contenuto">
               <p>Para conectarse a la red Wi-Fi del hotel, seleccione la red e introduzca las siguientes credenciales:</p>
               <div class="credenziali">
-                <strong>Usuario:</strong> Altavilla <small class="nota">(todas las redes Wi-Fi tienen la misma contraseña)</small>
+                <strong>Usuario:</strong> Altavilla <small class="nota">(todos los wi-fi tienen la misma contraseña)</small>
                 <strong>Contraseña:</strong> 91938163
               </div>
-              <p>Si tiene cualquier dificultad para conectarse, el personal de recepción estará encantado de ayudarle.</p>
+              <p>Para cualquier dificultad de conexión, el personal de recepción estará encantado de ayudarles.</p>
             </div>
           </div>
         </div>
@@ -424,9 +430,9 @@
         <div class="pannello" id="p-informazioni">
           <div class="pannello-interno">
             <div class="contenuto">
-              <p>Nuestro establecimiento está abierto las 24 horas del día, los 7 días de la semana, para recibirle a cualquier hora.</p>
-              <p>Cuando es necesario cambiamos la ropa de cama y las toallas, y cada día reponemos jabón y papel higiénico, para garantizarle siempre una estancia confortable.</p>
-              <p>Le recordamos que, cada vez que salga del hotel, es obligatorio dejar las llaves en recepción.</p>
+              <p>Nuestro establecimiento está abierto las 24 horas, los 7 días de la semana, para recibirles en cualquier momento del día.</p>
+              <p>Si es necesario, cambiamos la ropa de cama y reponemos los jabones y el papel higiénico a diario, para garantizarles siempre una estancia cómoda.</p>
+              <p>Les recordamos que, cada vez que salgan del establecimiento, es obligatorio dejar las llaves en recepción.</p>
               <div class="foto-griglia una">
                 <div class="foto"><img src="Reception.jpg" alt="Información" onerror="this.remove()"></div>
               </div>
@@ -444,8 +450,8 @@
         <div class="pannello" id="p-colazione">
           <div class="pannello-interno">
             <div class="contenuto">
-              <p>Ofrecemos un abundante desayuno, servido de 8:00 a 10:00.</p>
-              <p>Si no está incluido en su tarifa, el coste es de 7,50 € por persona. Para el pago, le invitamos a dirigirse a recepción.</p>
+              <p>Ofrecemos un rico desayuno, servido de 8:00 a 10:00.</p>
+              <p>Si no está incluido en su tarifa, el coste es de 7,50 € por persona. Para el pago, les invitamos a dirigirse a recepción.</p>
               <div class="foto-griglia una">
                 <div class="foto"><img src="Colazione.jpg" alt="Desayuno" onerror="this.remove()"></div>
               </div>
@@ -458,62 +464,62 @@
       <section class="voce">
         <button class="voce-titolo" aria-expanded="false" aria-controls="p-tour">
           <svg class="freccia" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          Excursiones
+          Tours
         </button>
         <div class="pannello" id="p-tour">
           <div class="pannello-interno">
             <div class="contenuto">
-              <p>¿Desea descubrir la ciudad? Desde nuestra recepción podemos reservar para usted todas las experiencias que quiera realizar. El hotel se encuentra en Via Principe Amedeo 9, a unos 0,3 km de la estación de Termini (5 minutos a pie). Estas son las principales experiencias disponibles con MP Tour, con indicaciones y distancia a pie desde el hotel:</p>
+              <p>¿Desean descubrir la ciudad? Desde nuestra recepción podemos reservar para ustedes todas las experiencias que deseen realizar. El hotel se encuentra en Via Principe Amedeo 9, a unos 0,3 km de la estación de Termini (5 minutos a pie). Estas son las principales experiencias disponibles con MP Tour, con indicaciones y distancia a pie desde el hotel:</p>
               <ul class="tappe">
                 <li>
                   <strong>Coliseo, Foro Romano y Palatino</strong>
                   <span class="dist">1,6 km · 20 min a pie</span>
-                  Diríjase a Via Cavour y sígala hasta Via dei Fori Imperiali: desde allí se ven perfectamente el Foro Romano y el Coliseo. Visitas guiadas, con audioguía o con entrada rápida.
+                  Lleguen a Via Cavour y síganla hasta Via dei Fori Imperiali: desde allí el Foro Romano y el Coliseo son bien visibles. Visitas guiadas, con audioguía o con entrada rápida.
                 </li>
                 <li>
                   <strong>Fontana de Trevi</strong>
                   <span class="dist">1,4 km · 17 min a pie</span>
-                  Baje por Via Nazionale hacia Piazza Venezia y siga las indicaciones hasta la fuente. Disponibles la visita con recorrido a pie y el tour por el subsuelo.
+                  Bajen por Via Nazionale hacia Piazza Venezia y sigan las indicaciones para la fuente. Disponibles la visita con recorrido a pie y el recorrido subterráneo.
                 </li>
                 <li>
                   <strong>Panteón</strong>
                   <span class="dist">2 km · 25 min a pie</span>
-                  Pase por la Fontana de Trevi y continúe unos 0,6 km más hacia Via del Corso y el Panteón.
+                  Pasen por la Fontana de Trevi y continúen unos 0,6 km hacia Via del Corso y el Panteón.
                 </li>
                 <li>
                   <strong>Piazza Navona Underground</strong>
                   <span class="dist">2,3 km · 28 min a pie</span>
-                  Desde el Panteón continúe unos 0,3 km hasta Piazza Navona.
+                  Desde el Panteón, continúen unos 0,3 km hasta Piazza Navona.
                 </li>
                 <li>
                   <strong>Castillo de Sant'Angelo</strong>
                   <span class="dist">3,2 km · 40 min a pie</span>
-                  Desde Piazza Navona continúe hacia el Tíber y Ponte Sant'Angelo. Como alternativa, puede utilizar el transporte público desde Termini.
+                  Desde Piazza Navona continúen hacia el Tíber y el Puente Sant'Angelo. Alternativamente, pueden usar el transporte público desde Termini.
                 </li>
                 <li>
                   <strong>Vaticano</strong> (Museos Vaticanos, Basílica y Cúpula de San Pedro, Jardines)
                   <span class="dist">4,5 km · 55 min a pie</span>
-                  Le recomendamos el metro línea A desde Termini (a unos 0,3 km del hotel) en dirección Battistini, parada Ottaviano: desde allí hay unos 10 minutos a pie.
+                  Les aconsejamos tomar el metro A desde Termini (a unos 0,3 km del hotel) en dirección Battistini, parada Ottaviano: desde allí son unos 10 minutos a pie.
                 </li>
                 <li>
                   <strong>Museos Capitolinos</strong>
                   <span class="dist">2 km · 25 min a pie</span>
-                  Baje por Via Nazionale hasta Piazza Venezia y suba la Cordonata hacia Piazza del Campidoglio.
+                  Bajen por Via Nazionale hasta Piazza Venezia y suban la Cordonata hacia la Piazza del Campidoglio.
                 </li>
                 <li>
-                  <strong>Galleria Borghese</strong>
+                  <strong>Galería Borghese</strong>
                   <span class="dist">2,5 km · 30 min a pie</span>
-                  Diríjase hacia Via Veneto y suba hasta Porta Pinciana; después entre en Villa Borghese: la Galleria se encuentra en el parque.
+                  Diríjanse hacia Via Veneto y suban hasta Porta Pinciana, luego entren a Villa Borghese: la Galería se encuentra en el parque.
                 </li>
                 <li>
-                  <strong>Hop on Hop off, golf cart, tours a pie y Food &amp; Wine</strong>
+                  <strong>Hop on Hop off, carritos de golf, tours a pie y Food &amp; Wine</strong>
                   <span class="dist">0,3 km · 4 min a pie</span>
-                  En recepción le indicarán el punto de encuentro para todas las experiencias que elija.
+                  La recepción les indicará el punto de encuentro para todas las experiencias que hayan seleccionado.
                 </li>
               </ul>
-              <p>Las distancias son orientativas y están calculadas desde el hotel. Para horarios, duración y disponibilidad, le invitamos a dirigirse a recepción.</p>
+              <p>Las distancias son indicativas y calculadas desde el hotel. Para horarios, duración y disponibilidad, les invitamos a dirigirse a recepción.</p>
               <div class="foto-griglia una">
-                <div class="foto"><img src="Tour2.jpg" alt="Excursiones" onerror="this.remove()"></div>
+                <div class="foto"><img src="Tour2.jpg" alt="Tours" onerror="this.remove()"></div>
               </div>
             </div>
           </div>
@@ -530,7 +536,7 @@
           <div class="pannello-interno">
             <div class="contenuto">
               <p>El check-out debe realizarse obligatoriamente antes de las 11:00.</p>
-              <p>Le invitamos a pasar por recepción para entregar la llave y despedirse. Si su salida está prevista para más tarde, puede dejar el equipaje en consigna (véase la sección Equipaje).</p>
+              <p>Les invitamos a presentarse en recepción para entregar la llave y despedirnos. Si su salida está prevista para más tarde, pueden dejar su equipaje en consigna (ver la sección Equipaje).</p>
               <div class="foto-griglia una">
                 <div class="foto"><img src="Checkout.jpg" alt="Check-out" onerror="this.remove()"></div>
               </div>
@@ -548,10 +554,10 @@
         <div class="pannello" id="p-bagagli">
           <div class="pannello-interno">
             <div class="contenuto">
-              <p>Ponemos a su disposición un espacio donde guardar el equipaje antes del check-in o después del check-out. Hay dos opciones de consigna:</p>
+              <p>Ponemos a su disposición un espacio donde guardar su equipaje antes del check-in o después del check-out. Hay dos opciones de consigna disponibles:</p>
               <ul>
-                <li><strong>Gratuita</strong>, pero sin vigilancia.</li>
-                <li><strong>De pago</strong>, con vigilancia y custodia, al precio de 5 € por persona.</li>
+                <li><strong>Gratuita</strong>, pero no vigilada.</li>
+                <li><strong>De pago</strong>, vigilada y custodiada, a un precio de 5 € por persona.</li>
               </ul>
               <div class="foto-griglia una">
                 <div class="foto"><img src="Bagagli.jpg" alt="Consigna de equipaje" onerror="this.remove()"></div>
@@ -570,8 +576,8 @@
         <div class="pannello" id="p-taxi">
           <div class="pannello-interno">
             <div class="contenuto">
-              <p>Si lo necesita, podemos llamar a un taxi para cualquier zona de Roma que desee visitar, sin ningún recargo.</p>
-              <p>Basta con dirigirse a recepción.</p>
+              <p>Si es necesario, podemos llamar un taxi para ustedes, hacia cualquier zona de Roma que deseen visitar, sin ningún recargo.</p>
+              <p>Solo tienen que dirigirse a recepción.</p>
               <div class="foto-griglia una">
                 <div class="foto"><img src="Taxi.jpg" alt="Taxi" onerror="this.remove()"></div>
               </div>
@@ -591,8 +597,8 @@
             <div class="contenuto">
               <p>Para cualquier información o solicitud, estamos a su disposición:</p>
               <div class="credenziali">
-                <strong>Teléfono:</strong> <a href="tel:NUMERO">+39 06 47825 568</a><br>
-                <strong>E-mail:</strong> <a href="mailto:info@hotelaltavilla.it">info@hotelaltavilla9.it</a>
+                <strong>Teléfono:</strong> <a href="tel:+390647825568">+39 06 47825 568</a><br>
+                <strong>Email:</strong> <a href="mailto:info@hotelaltavilla9.it">info@hotelaltavilla9.it</a>
               </div>
             </div>
           </div>
@@ -606,7 +612,7 @@
     document.querySelectorAll('.voce-titolo').forEach(function (btn) {
       btn.addEventListener('click', function () {
         var aperto = btn.getAttribute('aria-expanded') === 'true';
-        
+
         // Chiude tutte le altre sezioni aperte
         document.querySelectorAll('.voce-titolo').forEach(function (altroBtn) {
           if (altroBtn !== btn) {
@@ -645,3 +651,4 @@
 
 </body>
 </html>
+
