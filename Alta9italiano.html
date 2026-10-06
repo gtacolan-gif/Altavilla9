@@ -3,20 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hotel Altavilla9 · Informazioni</title>
+  <title>Altavilla9 info</title>
   <link rel="icon" type="image/png" href="Altavilla9.png">
   <link rel="apple-touch-icon" href="Altavilla9.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&display=swap">
   <style>
-    /* ▼ FONT MILESTONE: metti il file del font nella stessa cartella e controlla il nome qui sotto ▼ */
-    @font-face {
-      font-family: "Milestone One";
-      src: local("Milestone One"), local("MilestoneOne"),
-           url("MilestoneOne.woff2") format("woff2"),
-           url("MilestoneOne.ttf") format("truetype"),
-           url("MilestoneOne.otf") format("opentype");
-      font-display: swap;
-    }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     /* Altezza della barra superiore (usata anche per far partire lo sfondo sotto di essa) */
@@ -27,11 +20,15 @@
       /* Colore di riserva: viene sostituito in automatico dal colore della parte bassa dell'immagine (vedi script in fondo) */
       --colore-fondo: #7a6a58;
 
-      /* ▼ COLORI: oro della scritta Altavilla9 e tono chiaro abbinato per barra e riquadri ▼ */
-      --oro: #BDA133;                        /* colore della scritta Altavilla9, delle cornici e dei filetti */
-      --oro-scuro: #8A6F1A;                  /* oro più scuro per frecce, link e dettagli (si legge meglio) */
-      --pannello: rgba(252, 247, 229, 0.75); /* avorio chiaro appena dorato, 0.75 = 25% di trasparenza */
-      --testo: #3A2E12;                      /* colore dei titoli delle sezioni */
+      /* ▼ COLORI (uguali alla pagina index) ▼ */
+      --oro: #BDA133;                        /* cornici e filetti */
+      --oro-chiaro: #D8BE62;                 /* oro per frecce, link e dettagli: si legge bene sul verde scuro */
+      /* Verde profondo con riflesso diagonale, sempre trasparente (0.75 = 25% di trasparenza) */
+      --pannello: linear-gradient(135deg,
+                    rgba(14, 58, 50, 0.75) 0%,
+                    rgba(9, 46, 40, 0.75) 45%,
+                    rgba(4, 32, 28, 0.75) 100%);
+      --testo: #F6F0DC;                      /* avorio chiaro: testi leggibili sul verde scuro */
     }
 
     /* Questo colore riempie tutto lo schermo, anche sotto la barra del browser del telefono */
@@ -53,7 +50,7 @@
 
     body {
       font-family: Georgia, "Times New Roman", serif;
-      color: #2b2118;
+      color: var(--testo);
       min-height: 100vh;
       padding: calc(var(--barra) + 24px) 20px 40px;
     }
@@ -81,17 +78,25 @@
     .barra img {
       height: 90px;
       width: 90px;
+      object-fit: contain;
       display: block;
     }
 
     .barra h1 {
-      font-family: "Milestone One", "Milestone", Georgia, "Times New Roman", serif;
-      font-size: 2.8rem;
-      font-weight: normal;
-      letter-spacing: 0.03em;
+      font-family: "Cinzel", "Trajan Pro", Georgia, "Times New Roman", serif;
+      font-size: 2.1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
       line-height: 1.1;
-      color: var(--oro);
-      text-shadow: 0 1px 1px rgba(90, 70, 10, 0.35); /* leggera ombra per leggere meglio l'oro sul fondo chiaro */
+      white-space: nowrap;
+      color: #D4B85A; /* oro di riserva */
+      /* effetto oro metallico in rilievo */
+      background: linear-gradient(180deg, #F1E3AE 0%, #D2B65A 45%, #9A7B2A 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.55));
     }
 
     /* Freccia "indietro" a sinistra nella barra */
@@ -106,8 +111,8 @@
       align-items: center;
       justify-content: center;
       border-radius: 50%;
-      color: var(--oro-scuro);
-      background: rgba(255, 255, 255, 0.35);
+      color: var(--oro-chiaro);
+      background: rgba(255, 255, 255, 0.12);
       transition: background 0.2s;
     }
 
@@ -115,8 +120,8 @@
 
     .indietro:hover,
     .indietro:focus-visible {
-      background: rgba(255, 255, 255, 0.8);
-      outline: 2px solid var(--oro-scuro);
+      background: rgba(255, 255, 255, 0.25);
+      outline: 2px solid var(--oro-chiaro);
       outline-offset: 1px;
     }
 
@@ -135,7 +140,7 @@
       margin: 0 auto;
     }
 
-    /* Link Google (recensioni) */
+    /* Link recensioni */
     .recensione {
       display: flex;
       align-items: center;
@@ -154,13 +159,13 @@
       color: var(--testo);
       text-decoration: none;
       font-size: 1.25rem;
-      transition: background 0.2s;
+      transition: filter 0.2s;
     }
 
     .recensione:hover,
     .recensione:focus-visible {
-      background: rgba(255, 252, 240, 0.92);
-      outline: 2px solid var(--oro-scuro);
+      filter: brightness(1.35);
+      outline: 2px solid var(--oro-chiaro);
       outline-offset: 2px;
     }
 
@@ -197,15 +202,15 @@
       color: var(--testo);
     }
 
-    .voce-titolo:hover { background: rgba(255, 255, 255, 0.3); }
-    .voce-titolo:focus-visible { outline: 2px solid var(--oro-scuro); outline-offset: -2px; }
+    .voce-titolo:hover { background: rgba(255, 255, 255, 0.1); }
+    .voce-titolo:focus-visible { outline: 2px solid var(--oro-chiaro); outline-offset: -2px; }
 
     /* Freccia: punta verso la scritta (destra) e ruota in senso orario fino a puntare in basso */
     .freccia {
       flex: 0 0 auto;
       width: 26px;
       height: 26px;
-      color: var(--oro-scuro);
+      color: var(--oro-chiaro);
       transition: transform 0.35s ease;
     }
 
@@ -241,8 +246,8 @@
     .tappe li {
       margin: 0 0 10px;
       padding: 12px 16px 14px;
-      background: rgba(255, 255, 255, 0.45);
-      border: 2px solid var(--oro); /* Bordo completo, dello stesso colore della scritta */
+      background: rgba(0, 0, 0, 0.22);
+      border: 2px solid var(--oro);
       border-radius: 8px;
       font-size: 1.02rem;
       line-height: 1.55;
@@ -264,12 +269,12 @@
       padding: 2px 12px;
       border-radius: 999px;
       background: rgba(189, 161, 51, 0.22);
-      color: var(--oro-scuro);
+      color: var(--oro-chiaro);
       font-size: 0.9rem;
       font-weight: bold;
     }
 
-    .credenziali a { color: var(--oro-scuro); }
+    .credenziali a { color: var(--oro-chiaro); }
 
     /* Nota sotto lo username del Wi-Fi */
     .credenziali .nota {
@@ -281,8 +286,8 @@
     }
 
     .credenziali {
-      background: rgba(255, 255, 255, 0.55);
-      border: 2px solid var(--oro); /* Bordo completo, dello stesso colore della scritta */
+      background: rgba(0, 0, 0, 0.22);
+      border: 2px solid var(--oro);
       border-radius: 6px;
       padding: 12px 16px;
       margin: 4px 0 14px;
@@ -303,13 +308,13 @@
       position: relative;
       overflow: hidden;
       border-radius: 10px;
-      background: rgba(255, 255, 255, 0.45);
-      border: 2px solid var(--oro); /* Cornice dello stesso colore della scritta HOTEL ALTAVILLA9 */
+      background: rgba(0, 0, 0, 0.22);
+      border: 2px solid var(--oro);
       display: grid;
       place-items: center;
       text-align: center;
       font-size: 0.9rem;
-      color: var(--oro-scuro);
+      color: var(--oro-chiaro);
       padding: 8px;
     }
 
@@ -326,7 +331,7 @@
       display: block;
     }
 
-    /* Immagine cliccabile (es. Wi-Fi) */
+    /* Immagine cliccabile */
     .foto a {
       position: absolute;
       inset: 0;
@@ -334,7 +339,7 @@
       cursor: pointer;
     }
 
-    .foto a:focus-visible { outline: 3px solid var(--oro-scuro); outline-offset: -3px; }
+    .foto a:focus-visible { outline: 3px solid var(--oro-chiaro); outline-offset: -3px; }
 
     /* ===== TELEFONO ===== */
     @media (max-width: 480px) {
@@ -342,8 +347,8 @@
       body { padding: calc(var(--barra) + 16px) 12px 28px; }
       .barra { gap: 10px; padding: 0 12px; }
       .marchio { gap: 10px; }
-      .barra img { height: 54px; width: 44px; }
-      .barra h1 { font-size: 1.45rem; }
+      .barra img { height: 54px; width: 54px; }
+      .barra h1 { font-size: 0.95rem; letter-spacing: 0.04em; }
       .indietro { left: 6px; width: 34px; height: 34px; }
       .indietro svg { width: 22px; height: 22px; }
       .recensione { font-size: 1.05rem; padding: 10px 18px; gap: 10px; }
@@ -363,8 +368,8 @@
     </a>
 
     <a class="marchio" href="index.html" aria-label="Torna alla pagina iniziale">
-      <img src="Altavilla9.png" alt="Logo Hotel Altavilla Roma">
-      <h1>Hotel Altavilla9</h1>
+      <img src="Altavilla9.png" alt="Logo Hotel Altavilla Roma" onerror="this.onerror=null;this.src='Altavilla.png'">
+      <h1>Hotel Altavilla 9</h1>
     </a>
   </header>
 
@@ -592,7 +597,7 @@
             <div class="contenuto">
               <p>Per qualsiasi informazione o richiesta, siamo a vostra disposizione:</p>
               <div class="credenziali">
-                <strong>Telefono:</strong> <a href="tel:NUMERO">+39 06 47825 568</a><br>
+                <strong>Telefono:</strong> <a href="tel:+390647825568">+39 06 47825 568</a><br>
                 <strong>E-mail:</strong> <a href="mailto:info@hotelaltavilla9.it">info@hotelaltavilla9.it</a>
               </div>
             </div>
@@ -607,7 +612,7 @@
     document.querySelectorAll('.voce-titolo').forEach(function (btn) {
       btn.addEventListener('click', function () {
         var aperto = btn.getAttribute('aria-expanded') === 'true';
-        
+
         // Chiude tutte le altre sezioni aperte
         document.querySelectorAll('.voce-titolo').forEach(function (altroBtn) {
           if (altroBtn !== btn) {
@@ -646,3 +651,4 @@
 
 </body>
 </html>
+
