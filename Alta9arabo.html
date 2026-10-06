@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hotel Altavilla9 · معلومات</title>
+  <style>
+    /* ▼ FONT MILESTONE: metti il file del font nella stessa cartella e controlla il nome qui sotto ▼ */
+    @font-face {
+      font-family: "Milestone One";
+      src: local("Milestone One"), local("MilestoneOne"),
+           url("MilestoneOne.woff2") format("woff2"),
+           url("MilestoneOne.ttf") format("truetype"),
+           url("MilestoneOne.otf") format("opentype");
+      font-display: swap;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* Altezza della barra superiore (usata anche per far partire lo sfondo sotto di essa) */
+    :root {
+      --barra: 88px;
+      /* ▼▼▼ CAMBIA QUI il nome/percorso della tua immagine di sfondo ▼▼▼ */
+      --sfondo: url("Sfondo.png");
+      /* Colore di riserva: viene sostituito in automatico dal colore della parte bassa dell'immagine (vedi script in fondo) */
+      --colore-fondo: #7a6a58;
+
+      /* ▼ COLORI: oro della scritta Altavilla9 e tono chiaro abbinato per barra e riquadri ▼ */
+      --oro: #BDA133;                        /* colore della scritta Altavilla9, delle cornici e dei filetti */
+      --oro-scuro: #8A6F1A;                  /* oro più scuro per frecce, link e dettagli (si legge meglio) */
+      --pannello: rgba(252, 247, 229, 0.75); /* avorio chiaro appena dorato, 0.75 = 25% di trasparenza */
+      --testo: #3A2E12;                      /* colore dei titoli delle sezioni */
+    }
+
+    /* Questo colore riempie tutto lo schermo, anche sotto la barra del browser del telefono */
+    html { background-color: var(--colore-fondo); }
+
+    /* Immagine di sfondo: parte SOTTO la barra e in basso sfuma nel suo stesso colore */
+    body::before {
+      content: "";
+      position: fixed;
+      top: var(--barra);
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+      background:
+        linear-gradient(to bottom, transparent calc(100% - 180px), var(--colore-fondo) 100%),
+        var(--sfondo) center / cover no-repeat;
+    }
+
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      color: #2b2118;
+      min-height: 100vh;
+      padding: calc(var(--barra) + 24px) 20px 40px;
+    }
+
+    /* ===== BARRA SUPERIORE ===== */
+    .barra {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      height: var(--barra);
+      padding: 0 20px;
+      background: var(--pannello);
+      border-bottom: 1px solid rgba(189, 161, 51, 0.6);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      box-shadow: 0 2px 14px rgba(0, 0, 0, 0.2);
+    }
+
+    .barra img {
+      height: 78px;
+      width: 68px;
+      display: block;
+    }
+
+    .barra h1 {
+      font-family: "Milestone One", "Milestone", Georgia, "Times New Roman", serif;
+      font-size: 2.8rem;
+      font-weight: normal;
+      letter-spacing: 0.03em;
+      line-height: 1.1;
+      color: var(--oro);
+      text-shadow: 0 1px 1px rgba(90, 70, 10, 0.35); /* leggera ombra per leggere meglio l'oro sul fondo chiaro */
+    }
+
+    /* Freccia "indietro" a destra nella barra (RTL) */
+    .indietro {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      color: var(--oro-scuro);
+      background: rgba(255, 255, 255, 0.35);
+      transition: background 0.2s;
+    }
+
+    .indietro svg { width: 26px; height: 26px; display: block; transform: scaleX(-1); }
+
+    .indietro:hover,
+    .indietro:focus-visible {
+      background: rgba(255, 255, 255, 0.8);
+      outline: 2px solid var(--oro-scuro);
+      outline-offset: 1px;
+    }
+
+    .marchio {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ===== CONTENUTO ===== */
+    main {
+      width: 100%;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    /* Link Google (recensioni) */
+    .recensione {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      width: fit-content;
+      max-width: 100%;
+      margin: 0 auto 18px;
+      padding: 10px 24px;
+      background: var(--pannello);
+      border: 1px solid rgba(189, 161, 51, 0.5);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: 999px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
+      color: var(--testo);
+      text-decoration: none;
+      font-size: 1.25rem;
+      transition: background 0.2s;
+    }
+
+    .recensione:hover,
+    .recensione:focus-visible {
+      background: rgba(255, 252, 240, 0.92);
+      outline: 2px solid var(--oro-scuro);
+      outline-offset: 2px;
+    }
+
+    .recensione svg { flex: 0 0 auto; width: 30px; height: 30px; display: block; }
+
+    /* Riquadro centrale */
+    .riquadro {
+      background: var(--pannello);
+      border: 1px solid rgba(189, 161, 51, 0.5);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: 14px;
+      padding: 10px 28px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+    }
+
+    /* ===== ELENCO A FISARMONICA ===== */
+    .voce { border-bottom: 1px solid rgba(189, 161, 51, 0.5); }
+    .voce:last-child { border-bottom: none; }
+
+    .voce-titolo {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+      padding: 18px 8px;
+      background: none;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 1.6rem;
+      text-align: right;
+      color: var(--testo);
+    }
+
+    .voce-titolo:hover { background: rgba(255, 255, 255, 0.3); }
+    .voce-titolo:focus-visible { outline: 2px solid var(--oro-scuro); outline-offset: -2px; }
+
+    /* Freccia: punta verso la scritta e ruota in senso orario fino a puntare in basso */
+    .freccia {
+      flex: 0 0 auto;
+      width: 26px;
+      height: 26px;
+      color: var(--oro-scuro);
+      transform: scaleX(-1);
+      transition: transform 0.35s ease;
+    }
+
+    .voce-titolo[aria-expanded="true"] .freccia { transform: scaleX(-1) rotate(-90deg); }
+
+    /* Pannello che si apre */
+    .pannello {
+      display: grid;
+      grid-template-rows: 0fr;
+      visibility: hidden;
+      transition: grid-template-rows 0.3
