@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hotel Altavilla · Information</title>
+  <style>
+    /* ▼ FONT MILESTONE: metti il file del font nella stessa cartella e controlla il nome qui sotto ▼ */
+    @font-face {
+      font-family: "Milestone One";
+      src: local("Milestone One"), local("MilestoneOne"),
+           url("MilestoneOne.woff2") format("woff2"),
+           url("MilestoneOne.ttf") format("truetype"),
+           url("MilestoneOne.otf") format("opentype");
+      font-display: swap;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* Altezza della barra superiore (usata anche per far partire lo sfondo sotto di essa) */
+    :root {
+      --barra: 88px;
+      /* ▼▼▼ CAMBIA QUI il nome/percorso della tua immagine di sfondo ▼▼▼ */
+      --sfondo: url("Sfondo.png");
+      /* Colore di riserva: viene sostituito in automatico dal colore della parte bassa dell'immagine (vedi script in fondo) */
+      --colore-fondo: #7a6a58;
+
+      /* ▼ COLORI: oro della scritta Altavilla9 e tono chiaro abbinato per barra e riquadri ▼ */
+      --oro: #BDA133;                        /* colore della scritta Altavilla9, delle cornici e dei filetti */
+      --oro-scuro: #8A6F1A;                  /* oro più scuro per frecce, link e dettagli (si legge meglio) */
+      --pannello: rgba(252, 247, 229, 0.75); /* avorio chiaro appena dorato, 0.75 = 25% di trasparenza */
+      --testo: #3A2E12;                      /* colore dei titoli delle sezioni */
+    }
+
+    /* Questo colore riempie tutto lo schermo, anche sotto la barra del browser del telefono */
+    html { background-color: var(--colore-fondo); }
+
+    /* Immagine di sfondo: parte SOTTO la barra e in basso sfuma nel suo stesso colore */
+    body::before {
+      content: "";
+      position: fixed;
+      top: var(--barra);
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: -1;
+      background:
+        linear-gradient(to bottom, transparent calc(100% - 180px), var(--colore-fondo) 100%),
+        var(--sfondo) center / cover no-repeat;
+    }
+
+    body {
+      font-family: Georgia, "Times New Roman", serif;
+      color: #2b2118;
+      min-height: 100vh;
+      padding: calc(var(--barra) + 24px) 20px 40px;
+    }
+
+    /* ===== BARRA SUPERIORE ===== */
+    .barra {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      height: var(--barra);
+      padding: 0 20px;
+      background: var(--pannello);
+      border-bottom: 1px solid rgba(189, 161, 51, 0.6);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      box-shadow: 0 2px 14px rgba(0, 0, 0, 0.2);
+    }
+
+    .barra img {
+      height: 78px;
+      width: 68px;
+      display: block;
+    }
+
+    .barra h1 {
+      font-family: "Milestone One", "Milestone", Georgia, "Times New Roman", serif;
+      font-size: 2.8rem;
+      font-weight: normal;
+      letter-spacing: 0.03em;
+      line-height: 1.1;
+      color: var(--oro);
+      text-shadow: 0 1px 1px rgba(90, 70, 10, 0.35); /* leggera ombra per leggere meglio l'oro sul fondo chiaro */
+    }
+
+    /* Freccia "indietro" a sinistra nella barra */
+    .indietro {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      color: var(--oro-scuro);
+      background: rgba(255, 255, 255, 0.35);
+      transition: background 0.2s;
+    }
+
+    .indietro svg { width: 26px; height: 26px; display: block; }
+
+    .indietro:hover,
+    .indietro:focus-visible {
+      background: rgba(255, 255, 255, 0.8);
+      outline: 2px solid var(--oro-scuro);
+      outline-offset: 1px;
+    }
+
+    .marchio {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ===== CONTENUTO ===== */
+    main {
+      width: 100%;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    /* Link Google (recensioni) */
+    .recensione {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      width: fit-content;
+      max-width: 100%;
+      margin: 0 auto 18px;
+      padding: 10px 24px;
+      background: var(--pannello);
+      border: 1px solid rgba(189, 161, 51, 0.5);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: 999px;
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.2);
+      color: var(--testo);
+      text-decoration: none;
+      font-size: 1.25rem;
+      transition: background 0.2s;
+    }
+
+    .recensione:hover,
+    .recensione:focus-visible {
+      background: rgba(255, 252, 240, 0.92);
+      outline: 2px solid var(--oro-scuro);
+      outline-offset: 2px;
+    }
+
+    .recensione svg { flex: 0 0 auto; width: 30px; height: 30px; display: block; }
+
+    /* Riquadro centrale */
+    .riquadro {
+      background: var(--pannello);
+      border: 1px solid rgba(189, 161, 51, 0.5);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      border-radius: 14px;
+      padding: 10px 28px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.25);
+    }
+
+    /* ===== ELENCO A FISARMONICA ===== */
+    .voce { border-bottom: 1px solid rgba(189, 161, 51, 0.5); }
+    .voce:last-child { border-bottom: none; }
+
+    .voce-titolo {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+      padding: 18px 8px;
+      background: none;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 1.6rem;
+      text-align: left;
+      color: var(--testo);
+    }
+
+    .voce-titolo:hover { background: rgba(255, 255, 255, 0.3); }
+    .voce-titolo:focus-visible { outline: 2px solid var(--oro-scuro); outline-offset: -2px; }
+
+    /* Freccia: punta verso la scritta (destra) e ruota in senso orario fino a puntare in basso */
+    .freccia {
+      flex: 0 0 auto;
+      width: 26px;
+      height: 26px;
+      color: var(--oro-scuro);
+      transition: transform 0.35s ease;
+    }
+
+    .voce-titolo[aria-expanded="true"] .freccia { transform: rotate(90deg); }
+
+    /* Pannello che si apre */
+    .pannello {
+      display: grid;
+      grid-template-rows: 0fr;
+      visibility: hidden;
+      transition: grid-template-rows 0.35s ease, visibility 0s linear 0.35s;
+    }
+
+    .pannello.aperto {
+      grid-template-rows: 1fr;
+      visibility: visible;
+      transition: grid-template-rows 0.35s ease, visibility 0s;
+    }
+
+    .pannello-interno { overflow: hidden; }
+
+    .contenuto { padding: 4px 8px 22px 50px; }
+
+    .contenuto p { font-size: 1.1rem; line-height: 1.65; margin-bottom: 12px; }
+    .contenuto p:last-child { margin-bottom: 0; }
+
+    .contenuto ul { margin: 0 0 12px 20px; font-size: 1.1rem; line-height: 1.65; }
+    .contenuto li { margin-bottom: 6px; }
+
+    /* Elenco con distanze (sezione Tour): una scheda per ogni luogo */
+    .contenuto ul.tappe { list-style: none; margin: 8px 0 18px; padding: 0; }
+
+    .tappe li {
+      margin: 0 0 10px;
+      padding: 12px 16px 14px;
+      background: rgba(255, 255, 255, 0.45);
+      border: 2px solid var(--oro); /* Bordo completo, dello stesso colore della scritta */
+      border-radius: 8px;
+      font-size: 1.02rem;
+      line-height: 1.55;
+    }
+
+    .tappe li:last-child { margin-bottom: 0; }
+
+    .tappe strong {
+      display: block;
+      font-size: 1.2rem;
+      line-height: 1.3;
+      color: var(--testo);
+    }
+
+    .dist {
+      display: block;
+      width: fit-content;
+      margin: 6px 0 8px;
+      padding: 2px 12px;
+      border-radius: 999px;
+      background: rgba(189, 161, 51, 0.22);
+      color: var(--oro-scuro);
+      font-size: 0.9rem;
+      font-weight: bold;
+    }
+
+    .credenziali a { color: var(--oro-scuro); }
+
+    /* Nota sotto lo username del Wi-Fi */
+    .credenziali .nota {
+      display: block;
+      margin: 0 0 6px;
+      font-size: 0.85rem;
+      line-height: 1.4;
+      opacity: 0.85;
+    }
+
+    .credenziali {
+      background: rgba(255, 255, 255, 0.55);
+      border: 2px solid var(--oro); /* Bordo completo, dello stesso colore della scritta */
+      border-radius: 6px;
+      padding: 12px 16px;
+      margin: 4px 0 14px;
+      font-size: 1.15rem;
+      line-height: 1.8;
+    }
+
+    /* ===== SPAZI PER LE IMMAGINI ===== */
+    .foto-griglia {
+      display: grid;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .foto-griglia.una { grid-template-columns: 1fr; }
+
+    .foto {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.45);
+      border: 2px solid var(--oro); /* Cornice dello stesso colore della scritta HOTEL ALTAVILLA9 */
+      display: grid;
+      place-items: center;
+      text-align: center;
+      font-size: 0.9rem;
+      color: var(--oro-scuro);
+      padding: 8px;
+    }
+
+    .foto::before { content: "Insert image here"; }
+
+    .una .foto { aspect-ratio: 16 / 9; }
+
+    .foto img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Immagine cliccabile (es. Wi-Fi) */
+    .foto a {
+      position: absolute;
+      inset: 0;
+      display: block;
+      cursor: pointer;
+    }
+
+    .foto a:focus-visible { outline: 3px solid var(--oro-scuro); outline-offset: -3px; }
+
+    /* ===== TELEFONO ===== */
+    @media (max-width: 480px) {
+      :root { --barra: 64px; }
+      body { padding: calc(var(--barra) + 16px) 12px 28px; }
+      .barra { gap: 10px; padding: 0 12px; }
+      .marchio { gap: 10px; }
+      .barra img { height: 54px; width: 44px; }
+      .barra h1 { font-size: 1.45rem; }
+      .indietro { left: 6px; width: 34px; height: 34px; }
+      .indietro svg { width: 22px; height: 22px; }
+      .recensione { font-size: 1.05rem; padding: 10px 18px; gap: 10px; }
+      .riquadro { padding: 6px 14px; }
+      .voce-titolo { font-size: 1.35rem; padding: 16px 4px; gap: 12px; }
+      .contenuto { padding: 2px 4px 20px 4px; }
+      .tappe li { padding: 10px 12px 12px; }
+      .tappe strong { font-size: 1.1rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="barra">
+    <a class="indietro" href="index.html" aria-label="Back to language selection">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H5M11 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+
+    <a class="marchio" href="index.html" aria-label="Back to home page">
+      <img src="Altavilla.png" alt="Hotel Altavilla Rome logo">
+      <h1>Hotel Altavilla9</h1>
+    </a>
+  </header>
+
+  <main>
+
+    <a class="recensione" href="https://www.tripadvisor.it/UserReviewEdit-g187791-d529194-Hotel_Altavilla_Rome-Rome_Lazio.html" target="_blank" rel="noopener">
+      <svg viewBox="0 0 48 48" aria-hidden="true">
+        <circle cx="24" cy="24" r="24" fill="#34E0A1"/>
+        <path d="M6 25 Q9 17.5 16 17 M42 25 Q39 17.5 32 17" fill="none" stroke="#000" stroke-width="2.6" stroke-linecap="round"/>
+        <circle cx="16" cy="26" r="8.6" fill="#000"/>
+        <circle cx="16" cy="26" r="6.3" fill="#fff"/>
+        <circle cx="16" cy="26" r="3.3" fill="#000"/>
+        <circle cx="32" cy="26" r="8.6" fill="#000"/>
+        <circle cx="32" cy="26" r="6.3" fill="#fff"/>
+        <circle cx="32" cy="26" r="3.3" fill="#000"/>
+        <path d="M24 28.5 L21 32.5 L27 32.5 Z" fill="#000" stroke="#000" stroke-width="1.2" stroke-linejoin="round"/>
+      </svg>
+      <span>Your opinion matters to us</span>
+    </a>
+
+    <div class="riquadro">
+
+      <!-- ===== WI-FI ===== -->
+      <section class="voce">
+        <button class="voce-titolo" aria-expanded="false" aria-controls="p-wifi">
+          <svg class="freccia" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Wi-Fi
+        </button>
+        <div class="pannello" id="p-wifi">
+          <div class="pannello-interno">
+            <div class="contenuto">
+              <p>To connect to the hotel's Wi-Fi network, select the network and enter the following credentials:</p>
+              <div class="credenziali">
+                <strong>Username:</strong> Altavilla <small class="nota">(all Wi-Fi networks use the same password)</small>
+                <strong>Password:</strong> 91938163
+              </div>
+              <p>If you have any trouble connecting, our reception staff will be happy to help.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== INFORMAZIONI ===== -->
+      <section class="voce">
+        <button class="voce-titolo" aria-expanded="false" aria-controls="p-informazioni">
+          <svg class="freccia" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Information
+        </button>
+        <div class="pannello" id="p-informazioni">
+          <div class="pannello-interno">
+            <div class="contenuto">
+              <p>Our hotel is open 24 hours a day, 7 days a week, to welcome you at any time of day.</p>
+              <p>As needed we change the linen, and every day we restock soap and toilet paper, so that your stay is always comfortable.</p>
+              <p>Please remember that every time you leave the hotel, you must leave your keys at reception.</p>
+              <div class="foto-griglia una">
+                <div class="foto"><img src="Reception.jpg" alt="Information" onerror="this.remove()"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== COLAZIONE ===== -->
+      <section class="voce">
+        <button class="voce-titolo" aria-expanded="false" aria-controls="p-colazione">
+          <svg class="freccia" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Breakfast
+        </button>
+        <div class="pannello" id="p-colazione">
+          <div class="pannello-interno">
+            <div class="contenuto">
+              <p>We offer a generous breakfast, served from 8:00 to 10:00 a.m.</p>
+              <p>If it is not included in your rate, the cost is €7.50 per person. Please ask at reception for payment.</p>
+              <div class="foto-griglia una">
+                <div class="foto"><img src="Colazione.jpg" alt="Breakfast" onerror="this.remove()"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== TOUR ===== -->
+      <section class="voce">
+        <button class="voce-titolo" aria-expanded="false" aria-controls="p-tour">
+          <svg class="freccia" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Tours
+        </button>
+        <div class="pannello" id="p-tour">
+          <div class="pannello-interno">
+            <div class="contenuto">
+              <p>Would you like to discover the city? From our reception we can book for you all the experiences you wish to enjoy. The hotel is located at Via Principe Amedeo 9, about 0.3 km from Termini station (5 minutes on foot). Here are the main experiences available with MP Tour, with directions and walking distance from the hotel:</p>
+              <ul class="tappe">
+                <li>
+                  <strong>Colosseum, Roman Forum and Palatine Hill</strong>
+                  <span class="dist">1.6 km · 20 min walk</span>
+                  Head to Via Cavour and follow it to Via dei Fori Imperiali: from there the Roman Forum and the Colosseum are clearly visible. Guided tours, with audio guide or fast-track entry.
+                </li>
+                <li>
+                  <strong>Trevi Fountain</strong>
+                  <span class="dist">1.4 km · 17 min walk</span>
+                  Walk down Via Nazionale towards Piazza Venezia and follow the signs to the fountain. A walking tour and an underground tour are available.
+                </li>
+                <li>
+                  <strong>Pantheon</strong>
+                  <span class="dist">2 km · 25 min walk</span>
+                  Pass by the Trevi Fountain and continue for about another 0.6 km towards Via del Corso and the Pantheon.
+                </li>
+                <li>
+                  <strong>Piazza Navona Underground</strong>
+                  <span class="dist">2.3 km · 28 min walk</span>
+                  From the Pantheon continue for about 0.3 km to Piazza Navona.
+                </li>
+                <li>
+                  <strong>Castel Sant'Angelo</strong>
+                  <span class="dist">3.2 km · 40 min walk</span>
+                  From Piazza Navona continue towards the Tiber and Ponte Sant'Angelo. Alternatively, you can use public transport from Termini.
+                </li>
+                <li>
+                  <strong>Vatican</strong> (Vatican Museums, St. Peter's Basilica and Dome, Gardens)
+                  <span class="dist">4.5 km · 55 min walk</span>
+                  We recommend Metro Line A from Termini (about 0.3 km from the hotel) towards Battistini, stop Ottaviano: from there it is about a 10-minute walk.
+                </li>
+                <li>
+                  <strong>Capitoline Museums</strong>
+                  <span class="dist">2 km · 25 min walk</span>
+                  Walk down Via Nazionale to Piazza Venezia and climb the Cordonata towards Piazza del Campidoglio.
+                </li>
+                <li>
+                  <strong>Galleria Borghese</strong>
+                  <span class="dist">2.5 km · 30 min walk</span>
+                  Head towards Via Veneto and walk up to Porta Pinciana, then enter Villa Borghese: the Gallery is inside the park.
+                </li>
+                <li>
+                  <strong>Hop on Hop off, golf cart, walking tours and Food &amp; Wine</strong>
+                  <span class="dist">0.3 km · 4 min walk</span>
+                  Reception will tell you the meeting point for all the experiences you choose.
+                </li>
+              </ul>
+              <p>Distances are approximate and calculated from the hotel. For times, duration and availability, please ask at reception.</p>
+              <div class="foto-griglia una">
+                <div class="foto"><img src="Tour2.jpg" alt="Tours" onerror="this.remove()"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== CHECK-OUT ===== -->
+      <section class="voce">
+        <button class="voce-titolo" aria-expanded="false" aria-controls="p-checkout">
+          <svg class="freccia" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Check-out
+        </button>
+        <div class="pannello" id="p-checkout">
+          <div class="pannello-interno">
+            <div class="contenuto">
+              <p>Check-out must be completed no later than 11:00 a.m.</p>
+              <p>Please come to reception to hand in your key and say goodbye. If your departure is planned for later, you can leave your luggage in storage (see the Luggage section).</p>
+              <div class="foto-griglia una">
+                <div class="foto"><img src="Checkout.jpg" alt="Check-out" onerror="this.remove()"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== BAGAGLI ===== -->
+      <section class="voce">
+        <button class="voce-titolo" aria-expanded="false" aria-controls="p-bagagli">
+          <svg class="freccia" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Luggage
+        </button>
+        <div class="pannello" id="p-bagagli">
+          <div class="pannello-interno">
+            <div class="contenuto">
+              <p>We provide a space where you can store your luggage before check-in or after check-out. Two storage options are available:</p>
+              <ul>
+                <li><strong>Free</strong>, but unsupervised.</li>
+                <li><strong>Paid</strong>, supervised and guarded, at a price of €5 per person.</li>
+              </ul>
+              <div class="foto-griglia una">
+                <div class="foto"><img src="Bagagli.jpg" alt="Luggage storage" onerror="this.remove()"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== TAXI ===== -->
+      <section class="voce">
+        <button class="voce-titolo" aria-expanded="false" aria-controls="p-taxi">
+          <svg class="freccia" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Taxi
+        </button>
+        <div class="pannello" id="p-taxi">
+          <div class="pannello-interno">
+            <div class="contenuto">
+              <p>If needed, we can call a taxi for you to any area of Rome you wish to visit, with no extra charge.</p>
+              <p>Just ask at reception.</p>
+              <div class="foto-griglia una">
+                <div class="foto"><img src="Taxi.jpg" alt="Taxi" onerror="this.remove()"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== CONTATTI ===== -->
+      <section class="voce">
+        <button class="voce-titolo" aria-expanded="false" aria-controls="p-contatti">
+          <svg class="freccia" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h14M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Contact
+        </button>
+        <div class="pannello" id="p-contatti">
+          <div class="pannello-interno">
+            <div class="contenuto">
+              <p>For any information or request, we are at your service:</p>
+              <div class="credenziali">
+                <strong>Phone:</strong> <a href="tel:NUMERO">+39 06 47825 568</a><br>
+                <strong>E-mail:</strong> <a href="mailto:info@hotelaltavilla.it">info@hotelaltavilla.it</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <script>
+    document.querySelectorAll('.voce-titolo').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var aperto = btn.getAttribute('aria-expanded') === 'true';
+        
+        // Chiude tutte le altre sezioni aperte
+        document.querySelectorAll('.voce-titolo').forEach(function (altroBtn) {
+          if (altroBtn !== btn) {
+            altroBtn.setAttribute('aria-expanded', 'false');
+            document.getElementById(altroBtn.getAttribute('aria-controls')).classList.remove('aperto');
+          }
+        });
+
+        // Apre o chiude la sezione su cui abbiamo cliccato
+        btn.setAttribute('aria-expanded', String(!aperto));
+        document.getElementById(btn.getAttribute('aria-controls')).classList.toggle('aperto', !aperto);
+      });
+    });
+  </script>
+
+  <script>
+    (function () {
+      var m = getComputedStyle(document.documentElement).getPropertyValue('--sfondo').match(/url\(["']?(.*?)["']?\)/);
+      if (!m) return;
+      var img = new Image();
+      img.onload = function () {
+        try {
+          var n = 8, c = document.createElement('canvas');
+          c.width = c.height = n;
+          var x = c.getContext('2d');
+          x.drawImage(img, 0, img.height * 0.9, img.width, img.height * 0.1, 0, 0, n, n);
+          var d = x.getImageData(0, 0, n, n).data, r = 0, g = 0, b = 0, k = n * n;
+          for (var i = 0; i < d.length; i += 4) { r += d[i]; g += d[i + 1]; b += d[i + 2]; }
+          document.documentElement.style.setProperty('--colore-fondo',
+            'rgb(' + Math.round(r / k) + ',' + Math.round(g / k) + ',' + Math.round(b / k) + ')');
+        } catch (e) { }
+      };
+      img.src = m[1];
+    })();
+  </script>
+
+</body>
+</html>
