@@ -5,8 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Altavilla9 info</title>
 <link rel="icon" type="image/png" href="Altavilla9.png">
-<link rel="icon" type="image/png" href="Altavilla9.png">
+<link rel="icon" type="image/png" href="Altavilla.png">
 <link rel="apple-touch-icon" href="Altavilla9.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&display=swap">
 
   <style>
     /* ▼ FONT MILESTONE: metti il file del font nella stessa cartella e controlla il nome qui sotto ▼ */
@@ -30,7 +33,12 @@
 
       /* ▼ COLORI ▼ */
       --oro: #BDA133;                         /* colore della scritta Altavilla9 (non toccare) */
-      --pannello: rgba(0, 82, 77, 0.75);      /* Pantone 19-5217 TCX (PMS 3165), un po' più verde; 0.75 = 25% di trasparenza */
+      /* Verde profondo con riflesso diagonale, come nella foto; sempre trasparente (0.75 = 25% di trasparenza).
+         Per cambiare l'intensità modifica i tre colori; per la trasparenza cambia 0.75 */
+      --pannello: linear-gradient(135deg,
+                    rgba(30, 94, 76, 0.75) 0%,
+                    rgba(16, 62, 52, 0.75) 45%,
+                    rgba(7, 40, 35, 0.75) 100%);
       --testo-pannello: #F6F0DC;              /* avorio chiaro: nomi delle lingue leggibili sul verde petrolio */
     }
 
@@ -85,20 +93,26 @@
     }
 
     .barra h1 {
-      font-family: "Milestone One", "Milestone", Georgia, "Times New Roman", serif;
-      font-size: 2.8rem;
-      font-weight: normal;
-      letter-spacing: 0.03em;
+      font-family: "Cinzel", "Trajan Pro", Georgia, "Times New Roman", serif;
+      font-size: 2.1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
       line-height: 1.1;
-      color: var(--oro);
-      text-shadow: 0 1px 1px rgba(90, 70, 10, 0.35);
+      color: #D4B85A; /* oro di riserva */
+      /* effetto oro metallico in rilievo */
+      background: linear-gradient(180deg, #F1E3AE 0%, #D2B65A 45%, #9A7B2A 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.55));
     }
 
     @media (max-width: 480px) {
       :root { --barra: 64px; }
       .barra { gap: 10px; padding: 0 12px; }
       .barra img { height: 54px; width: 44px; }
-      .barra h1 { font-size: 1.5rem; }
+      .barra h1 { font-size: 1.05rem; letter-spacing: 0.05em; }
     }
 
     .riquadro {
@@ -161,7 +175,7 @@
   <header class="barra">
     <!-- Se Altavilla9.png non viene trovato, prova in automatico Altavilla.png -->
     <img src="Altavilla9.png" alt="Logo Hotel Altavilla Roma" onerror="this.onerror=null;this.src='Altavilla.png'">
-    <h1>Hotel Altavilla9</h1>
+    <h1>Hotel Altavilla 9</h1>
   </header>
 
   <main class="riquadro">
