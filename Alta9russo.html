@@ -3,33 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Hotel Altavilla9 · Информация</title>
+  <title>Altavilla9 info</title>
+  <link rel="icon" type="image/png" href="Altavilla9.png">
+  <link rel="apple-touch-icon" href="Altavilla9.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&display=swap">
   <style>
-    /* ▼ FONT MILESTONE: metti il file del font nella stessa cartella e controlla il nome qui sotto ▼ */
-    @font-face {
-      font-family: "Milestone One";
-      src: local("Milestone One"), local("MilestoneOne"),
-           url("MilestoneOne.woff2") format("woff2"),
-           url("MilestoneOne.ttf") format("truetype"),
-           url("MilestoneOne.otf") format("opentype");
-      font-display: swap;
-    }
-
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     /* Altezza della barra superiore (usata anche per far partire lo sfondo sotto di essa) */
     :root {
       --barra: 88px;
       /* ▼▼▼ CAMBIA QUI il nome/percorso della tua immagine di sfondo ▼▼▼ */
-      --sfondo: url("Sfondo.png");
+      --sfondo: url("Sfondo9.png");
       /* Colore di riserva: viene sostituito in automatico dal colore della parte bassa dell'immagine (vedi script in fondo) */
       --colore-fondo: #7a6a58;
 
-      /* ▼ COLORI: oro della scritta Altavilla9 e tono chiaro abbinato per barra e riquadri ▼ */
-      --oro: #BDA133;                        /* colore della scritta Altavilla9, delle cornici e dei filetti */
-      --oro-scuro: #8A6F1A;                  /* oro più scuro per frecce, link e dettagli (si legge meglio) */
-      --pannello: rgba(252, 247, 229, 0.75); /* avorio chiaro appena dorato, 0.75 = 25% di trasparenza */
-      --testo: #3A2E12;                      /* colore dei titoli delle sezioni */
+      /* ▼ COLORI (uguali alla pagina index) ▼ */
+      --oro: #BDA133;                        /* cornici e filetti */
+      --oro-chiaro: #D8BE62;                 /* oro per frecce, link e dettagli: si legge bene sul verde scuro */
+      /* Verde profondo con riflesso diagonale, sempre trasparente (0.75 = 25% di trasparenza) */
+      --pannello: linear-gradient(135deg,
+                    rgba(14, 58, 50, 0.75) 0%,
+                    rgba(9, 46, 40, 0.75) 45%,
+                    rgba(4, 32, 28, 0.75) 100%);
+      --testo: #F6F0DC;                      /* avorio chiaro: testi leggibili sul verde scuro */
     }
 
     /* Questo colore riempie tutto lo schermo, anche sotto la barra del browser del telefono */
@@ -51,7 +50,7 @@
 
     body {
       font-family: Georgia, "Times New Roman", serif;
-      color: #2b2118;
+      color: var(--testo);
       min-height: 100vh;
       padding: calc(var(--barra) + 24px) 20px 40px;
     }
@@ -77,19 +76,27 @@
     }
 
     .barra img {
-      height: 78px;
-      width: 68px;
+      height: 90px;
+      width: 90px;
+      object-fit: contain;
       display: block;
     }
 
     .barra h1 {
-      font-family: "Milestone One", "Milestone", Georgia, "Times New Roman", serif;
-      font-size: 2.8rem;
-      font-weight: normal;
-      letter-spacing: 0.03em;
+      font-family: "Cinzel", "Trajan Pro", Georgia, "Times New Roman", serif;
+      font-size: 2.1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
       line-height: 1.1;
-      color: var(--oro);
-      text-shadow: 0 1px 1px rgba(90, 70, 10, 0.35); /* leggera ombra per leggere meglio l'oro sul fondo chiaro */
+      white-space: nowrap;
+      color: #D4B85A; /* oro di riserva */
+      /* effetto oro metallico in rilievo */
+      background: linear-gradient(180deg, #F1E3AE 0%, #D2B65A 45%, #9A7B2A 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.55));
     }
 
     /* Freccia "indietro" a sinistra nella barra */
@@ -104,8 +111,8 @@
       align-items: center;
       justify-content: center;
       border-radius: 50%;
-      color: var(--oro-scuro);
-      background: rgba(255, 255, 255, 0.35);
+      color: var(--oro-chiaro);
+      background: rgba(255, 255, 255, 0.12);
       transition: background 0.2s;
     }
 
@@ -113,8 +120,8 @@
 
     .indietro:hover,
     .indietro:focus-visible {
-      background: rgba(255, 255, 255, 0.8);
-      outline: 2px solid var(--oro-scuro);
+      background: rgba(255, 255, 255, 0.25);
+      outline: 2px solid var(--oro-chiaro);
       outline-offset: 1px;
     }
 
@@ -133,7 +140,7 @@
       margin: 0 auto;
     }
 
-    /* Link Google (recensioni) */
+    /* Link recensioni */
     .recensione {
       display: flex;
       align-items: center;
@@ -152,13 +159,13 @@
       color: var(--testo);
       text-decoration: none;
       font-size: 1.25rem;
-      transition: background 0.2s;
+      transition: filter 0.2s;
     }
 
     .recensione:hover,
     .recensione:focus-visible {
-      background: rgba(255, 252, 240, 0.92);
-      outline: 2px solid var(--oro-scuro);
+      filter: brightness(1.35);
+      outline: 2px solid var(--oro-chiaro);
       outline-offset: 2px;
     }
 
@@ -195,15 +202,15 @@
       color: var(--testo);
     }
 
-    .voce-titolo:hover { background: rgba(255, 255, 255, 0.3); }
-    .voce-titolo:focus-visible { outline: 2px solid var(--oro-scuro); outline-offset: -2px; }
+    .voce-titolo:hover { background: rgba(255, 255, 255, 0.1); }
+    .voce-titolo:focus-visible { outline: 2px solid var(--oro-chiaro); outline-offset: -2px; }
 
     /* Freccia: punta verso la scritta (destra) e ruota in senso orario fino a puntare in basso */
     .freccia {
       flex: 0 0 auto;
       width: 26px;
       height: 26px;
-      color: var(--oro-scuro);
+      color: var(--oro-chiaro);
       transition: transform 0.35s ease;
     }
 
@@ -239,8 +246,8 @@
     .tappe li {
       margin: 0 0 10px;
       padding: 12px 16px 14px;
-      background: rgba(255, 255, 255, 0.45);
-      border: 2px solid var(--oro); /* Bordo completo, dello stesso colore della scritta */
+      background: rgba(0, 0, 0, 0.22);
+      border: 2px solid var(--oro);
       border-radius: 8px;
       font-size: 1.02rem;
       line-height: 1.55;
@@ -262,12 +269,12 @@
       padding: 2px 12px;
       border-radius: 999px;
       background: rgba(189, 161, 51, 0.22);
-      color: var(--oro-scuro);
+      color: var(--oro-chiaro);
       font-size: 0.9rem;
       font-weight: bold;
     }
 
-    .credenziali a { color: var(--oro-scuro); }
+    .credenziali a { color: var(--oro-chiaro); }
 
     /* Nota sotto lo username del Wi-Fi */
     .credenziali .nota {
@@ -279,8 +286,8 @@
     }
 
     .credenziali {
-      background: rgba(255, 255, 255, 0.55);
-      border: 2px solid var(--oro); /* Bordo completo, dello stesso colore della scritta */
+      background: rgba(0, 0, 0, 0.22);
+      border: 2px solid var(--oro);
       border-radius: 6px;
       padding: 12px 16px;
       margin: 4px 0 14px;
@@ -301,13 +308,13 @@
       position: relative;
       overflow: hidden;
       border-radius: 10px;
-      background: rgba(255, 255, 255, 0.45);
-      border: 2px solid var(--oro); /* Cornice dello stesso colore della scritta HOTEL ALTAVILLA9 */
+      background: rgba(0, 0, 0, 0.22);
+      border: 2px solid var(--oro);
       display: grid;
       place-items: center;
       text-align: center;
       font-size: 0.9rem;
-      color: var(--oro-scuro);
+      color: var(--oro-chiaro);
       padding: 8px;
     }
 
@@ -324,7 +331,7 @@
       display: block;
     }
 
-    /* Immagine cliccabile (es. Wi-Fi) */
+    /* Immagine cliccabile */
     .foto a {
       position: absolute;
       inset: 0;
@@ -332,7 +339,7 @@
       cursor: pointer;
     }
 
-    .foto a:focus-visible { outline: 3px solid var(--oro-scuro); outline-offset: -3px; }
+    .foto a:focus-visible { outline: 3px solid var(--oro-chiaro); outline-offset: -3px; }
 
     /* ===== TELEFONO ===== */
     @media (max-width: 480px) {
@@ -340,8 +347,8 @@
       body { padding: calc(var(--barra) + 16px) 12px 28px; }
       .barra { gap: 10px; padding: 0 12px; }
       .marchio { gap: 10px; }
-      .barra img { height: 54px; width: 44px; }
-      .barra h1 { font-size: 1.45rem; }
+      .barra img { height: 54px; width: 54px; }
+      .barra h1 { font-size: 0.95rem; letter-spacing: 0.04em; }
       .indietro { left: 6px; width: 34px; height: 34px; }
       .indietro svg { width: 22px; height: 22px; }
       .recensione { font-size: 1.05rem; padding: 10px 18px; gap: 10px; }
@@ -361,8 +368,8 @@
     </a>
 
     <a class="marchio" href="index.html" aria-label="Вернуться на главную страницу">
-      <img src="Altavilla.png" alt="Логотип Hotel Altavilla Roma">
-      <h1>Hotel Altavilla9</h1>
+      <img src="Altavilla9.png" alt="Логотип отеля Altavilla Рим" onerror="this.onerror=null;this.src='Altavilla.png'">
+      <h1>Hotel Altavilla 9</h1>
     </a>
   </header>
 
@@ -405,10 +412,10 @@
             <div class="contenuto">
               <p>Чтобы подключиться к сети Wi-Fi отеля, выберите сеть и введите следующие данные:</p>
               <div class="credenziali">
-                <strong>Имя пользователя:</strong> Altavilla <small class="nota">(для всех сетей Wi-Fi пароль одинаковый)</small>
+                <strong>Имя пользователя:</strong> Altavilla <small class="nota">(у всех Wi-Fi сетей одинаковый пароль)</small>
                 <strong>Пароль:</strong> 91938163
               </div>
-              <p>В случае возникновения трудностей с подключением сотрудники стойки регистрации будут рады вам помочь.</p>
+              <p>Если у вас возникнут трудности с подключением, сотрудники стойки регистрации будут рады вам помочь.</p>
             </div>
           </div>
         </div>
@@ -423,9 +430,9 @@
         <div class="pannello" id="p-informazioni">
           <div class="pannello-interno">
             <div class="contenuto">
-              <p>Наш отель открыт круглосуточно, 7 дней в неделю, чтобы приветствовать вас в любое время дня и ночи.</p>
-              <p>При необходимости мы производим смену постельного белья и ежедневно пополняем запасы мыла и туалетной бумаги, чтобы обеспечить вам комфортное пребывание.</p>
-              <p>Напоминаем, что каждый раз, когда вы покидаете отель, необходимо оставлять ключи на стойке регистрации.</p>
+              <p>Наш отель открыт круглосуточно, 7 дней в неделю, чтобы приветствовать вас в любое время дня.</p>
+              <p>При необходимости мы производим смену постельного белья и ежедневно пополняем запасы мыла и туалетной бумаги, чтобы гарантировать вам всегда комфортное пребывание.</p>
+              <p>Напоминаем вам, что каждый раз, когда вы покидаете отель, необходимо оставлять ключи на стойке регистрации.</p>
               <div class="foto-griglia una">
                 <div class="foto"><img src="Reception.jpg" alt="Информация" onerror="this.remove()"></div>
               </div>
@@ -443,8 +450,8 @@
         <div class="pannello" id="p-colazione">
           <div class="pannello-interno">
             <div class="contenuto">
-              <p>Мы предлагаем сытный завтрак, который подается с 8:00 до 10:00.</p>
-              <p>Если он не включен в стоимость вашего проживания, его стоимость составляет 7,50 € с человека. Для оплаты обращайтесь на стойку регистрации.</p>
+              <p>Мы предлагаем богатый завтрак, который подается с 8:00 до 10:00.</p>
+              <p>Если он не включен в стоимость вашего проживания, его стоимость составляет 7,50 евро с человека. Для оплаты обращайтесь на стойку регистрации.</p>
               <div class="foto-griglia una">
                 <div class="foto"><img src="Colazione.jpg" alt="Завтрак" onerror="this.remove()"></div>
               </div>
@@ -462,55 +469,55 @@
         <div class="pannello" id="p-tour">
           <div class="pannello-interno">
             <div class="contenuto">
-              <p>Хотите открыть для себя город? На нашей стойке регистрации мы можем забронировать для вас любые экскурсии. Отель расположен по адресу Via Principe Amedeo 9, примерно в 0,3 км от вокзала Термини (5 минут пешком). Вот основные экскурсии, доступные с MP Tour, с указанием маршрута и расстояния пешком от отеля:</p>
+              <p>Хотите открыть для себя город? На нашей стойке регистрации мы можем забронировать для вас любые экскурсии. Отель находится по адресу Via Principe Amedeo 9, примерно в 0,3 км от вокзала Термини (5 минут пешком). Вот основные экскурсии, доступные с MP Tour, с указанием маршрута и расстояния пешком от отеля:</p>
               <ul class="tappe">
                 <li>
                   <strong>Колизей, Римский форум и Палатин</strong>
                   <span class="dist">1,6 км · 20 мин пешком</span>
-                  Дойдите до Via Cavour и следуйте по ней до Via dei Fori Imperiali: оттуда хорошо видны Римский форум и Колизей. Доступны экскурсии с гидом, с аудиогидом или с быстрым входом.
+                  Дойдите до Via Cavour и следуйте по ней до Via dei Fori Imperiali: оттуда хорошо видны Римский форум и Колизей. Доступны экскурсии с гидом, с аудиогидом или с правом быстрого прохода.
                 </li>
                 <li>
                   <strong>Фонтан Треви</strong>
                   <span class="dist">1,4 км · 17 мин пешком</span>
-                  Спуститесь по Via Nazionale в сторону Piazza Venezia и следуйте указателям к фонтану. Доступны пешеходные экскурсии и экскурсии по подземельям.
+                  Спуститесь по Via Nazionale к площади Пьяцца Венеция и follow указателям к фонтану. Доступны пешие экскурсии и экскурсии по подземельям.
                 </li>
                 <li>
                   <strong>Пантеон</strong>
                   <span class="dist">2 км · 25 мин пешком</span>
-                  Пройдите мимо фонтана Треви и продолжайте двигаться еще около 0,6 км в сторону Via del Corso и Пантеона.
+                  Пройдите мимо фонтана Треви и продолжайте идти еще около 0,6 км в сторону Via del Corso и Пантеона.
                 </li>
                 <li>
                   <strong>Подземелья Пьяцца Навона</strong>
                   <span class="dist">2,3 км · 28 мин пешком</span>
-                  От Пантеона пройдите около 0,3 км до Piazza Navona.
+                  От Пантеона пройдите около 0,3 км до Пьяцца Навона.
                 </li>
                 <li>
                   <strong>Замок Святого Ангела</strong>
                   <span class="dist">3,2 км · 40 мин пешком</span>
-                  От Piazza Navona идите к реке Тибр и мосту Ponte Sant'Angelo. В качестве альтернативы можно воспользоваться общественным транспортом от вокзала Термини.
+                  От Пьяцца Навона идите к Тибру и мосту Святого Ангела. В качестве альтернативы можно воспользоваться общественным транспортом от вокзала Термини.
                 </li>
                 <li>
-                  <strong>Ватикан</strong> (Музеи Ватикана, Базилика и купол Святого Петра, Сады)
+                  <strong>Ватикан</strong> (Музеи Ватикана, Базилика и Купол Святого Петра, Сады)
                   <span class="dist">4,5 км · 55 мин пешком</span>
-                  Рекомендуем воспользоваться линией метро A от станции Термини (около 0,3 км от отеля) в направлении Battistini до остановки Ottaviano: оттуда около 10 минут пешком.
+                  Мы рекомендуем воспользоваться линией метро А от станции Термини (около 0,3 км от отеля) в направлении Battistini до остановки Ottaviano: оттуда около 10 минут пешком.
                 </li>
                 <li>
                   <strong>Капитолийские музеи</strong>
                   <span class="dist">2 км · 25 мин пешком</span>
-                  Спуститесь по Via Nazionale до Piazza Venezia и поднимитесь по лестнице Кордоната к Piazza del Campidoglio.
+                  Спуститесь по Via Nazionale до Пьяцца Венеция и поднимитесь по лестнице Кордоната к Капитолийской площади.
                 </li>
                 <li>
                   <strong>Галерея Боргезе</strong>
                   <span class="dist">2,5 км · 30 мин пешком</span>
-                  Направляйтесь к Via Veneto и поднимайтесь по ней до Porta Pinciana, затем войдите на территорию Villa Borghese: галерея находится в парке.
+                  Направляйтесь к Via Veneto и поднимитесь по ней до Porta Pinciana, затем войдите в парк Вилла Боргезе: галерея находится на территории парка.
                 </li>
                 <li>
-                  <strong>Автобусы Hop on Hop off, гольф-кары, пешеходные экскурсии и Food &amp; Wine</strong>
+                  <strong>Автобусы Hop on Hop off, гольф-кары, пешие экскурсии и гастрономические туры</strong>
                   <span class="dist">0,3 км · 4 мин пешком</span>
                   Сотрудники стойки регистрации укажут вам место встречи для всех выбранных вами экскурсий.
                 </li>
               </ul>
-              <p>Расстояния указаны приблизительно и рассчитаны от отеля. Узнать расписание, продолжительность и наличие мест можно на стойке регистрации.</p>
+              <p>Расстояния являются ориентировочными и рассчитаны от отеля. Для получения информации о времени, продолжительности и наличии свободных мест обращайтесь на стойку регистрации.</p>
               <div class="foto-griglia una">
                 <div class="foto"><img src="Tour2.jpg" alt="Экскурсии" onerror="this.remove()"></div>
               </div>
@@ -528,8 +535,8 @@
         <div class="pannello" id="p-checkout">
           <div class="pannello-interno">
             <div class="contenuto">
-              <p>Выезд из отеля (check-out) должен быть осуществлен строго до 11:00.</p>
-              <p>Приглашаем вас подойти на стойку регистрации, чтобы сдать ключ и попрощаться. Если ваш отъезд запланирован на более позднее время, вы можете оставить свой багаж в камере хранения (см. раздел «Багаж»).</p>
+              <p>Выезд должен быть осуществлен строго до 11:00.</p>
+              <p>Приглашаем вас подойти на стойку регистрации, чтобы сдать ключ и попрощаться. Если ваш отъезд запланирован на более позднее время, вы можете оставить багаж в камере хранения (см. раздел «Багаж»).</p>
               <div class="foto-griglia una">
                 <div class="foto"><img src="Checkout.jpg" alt="Выезд" onerror="this.remove()"></div>
               </div>
@@ -550,7 +557,7 @@
               <p>Мы предоставляем вам место для хранения багажа до заезда или после выезда. Доступны два варианта хранения:</p>
               <ul>
                 <li><strong>Бесплатно</strong>, но без присмотра.</li>
-                <li><strong>Платно</strong>, под охраной и присмотром, стоимость — 5 € с человека.</li>
+                <li><strong>Платно</strong>, под присмотром и охраной, по цене 5 евро с человека.</li>
               </ul>
               <div class="foto-griglia una">
                 <div class="foto"><img src="Bagagli.jpg" alt="Камера хранения багажа" onerror="this.remove()"></div>
@@ -569,7 +576,7 @@
         <div class="pannello" id="p-taxi">
           <div class="pannello-interno">
             <div class="contenuto">
-              <p>При необходимости мы можем вызвать для вас такси в любой район Рима, который вы хотите посетить, без каких-либо наценок.</p>
+              <p>При необходимости мы можем вызвать для вас такси в любой район Рима, который вы хотите посетить, без каких-либо дополнительных наценок.</p>
               <p>Вам просто нужно обратиться на стойку регистрации.</p>
               <div class="foto-griglia una">
                 <div class="foto"><img src="Taxi.jpg" alt="Такси" onerror="this.remove()"></div>
@@ -588,10 +595,10 @@
         <div class="pannello" id="p-contatti">
           <div class="pannello-interno">
             <div class="contenuto">
-              <p>По любой информации или запросам мы в вашем распоряжении:</p>
+              <p>Для получения любой информации или по любым вопросам мы в вашем распоряжении:</p>
               <div class="credenziali">
-                <strong>Телефон:</strong> <a href="tel:NUMERO">+39 06 47825 568</a><br>
-                <strong>Эл. почта:</strong> <a href="mailto:info@hotelaltavilla.it">info@hotelaltavilla9.it</a>
+                <strong>Телефон:</strong> <a href="tel:+390647825568">+39 06 47825 568</a><br>
+                <strong>E-mail:</strong> <a href="mailto:info@hotelaltavilla9.it">info@hotelaltavilla9.it</a>
               </div>
             </div>
           </div>
@@ -605,7 +612,7 @@
     document.querySelectorAll('.voce-titolo').forEach(function (btn) {
       btn.addEventListener('click', function () {
         var aperto = btn.getAttribute('aria-expanded') === 'true';
-        
+
         // Chiude tutte le altre sezioni aperte
         document.querySelectorAll('.voce-titolo').forEach(function (altroBtn) {
           if (altroBtn !== btn) {
@@ -644,3 +651,4 @@
 
 </body>
 </html>
+
