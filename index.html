@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Altavilla9 info</title>
 <link rel="icon" type="image/png" href="Altavilla9.png">
+<link rel="icon" type="image/png" href="Altavilla.png">
 <link rel="apple-touch-icon" href="Altavilla9.png">
 
   <style>
@@ -27,10 +28,10 @@
       --sfondo: url("Sfondo9.png");
       --colore-fondo: #7a6a58;
 
-      /* ▼ COLORI: oro della scritta dell'immagine e tono chiaro abbinato per barra e riquadro ▼ */
-      --oro: #BDA133;                        /* colore della scritta Altavilla9 */
-      --pannello: rgba(252, 247, 229, 0.75); /* avorio chiaro appena dorato, 0.75 = 25% di trasparenza */
-      --testo-pannello: #3A2E12;             /* colore dei nomi delle lingue */
+      /* ▼ COLORI ▼ */
+      --oro: #BDA133;                         /* colore della scritta Altavilla9 (non toccare) */
+      --pannello: rgba(0, 82, 77, 0.75);      /* Pantone 19-5217 TCX (PMS 3165), un po' più verde; 0.75 = 25% di trasparenza */
+      --testo-pannello: #F6F0DC;              /* avorio chiaro: nomi delle lingue leggibili sul verde petrolio */
     }
 
     html { background-color: var(--colore-fondo); }
@@ -79,6 +80,7 @@
     .barra img {
       height: 90px;
       width: 90px;
+      object-fit: contain;
       display: block;
     }
 
@@ -89,7 +91,7 @@
       letter-spacing: 0.03em;
       line-height: 1.1;
       color: var(--oro);
-      text-shadow: 0 1px 1px rgba(90, 70, 10, 0.35); /* leggero ombreggiatura per leggere meglio l'oro sul fondo chiaro */
+      text-shadow: 0 1px 1px rgba(90, 70, 10, 0.35);
     }
 
     @media (max-width: 480px) {
@@ -132,7 +134,7 @@
 
     .lingue a:hover,
     .lingue a:focus-visible {
-      background: rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.16);
       outline: 2px solid var(--oro);
       outline-offset: -2px;
     }
@@ -143,7 +145,7 @@
       height: 24px;
       border-radius: 3px;
       overflow: hidden;
-      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35);
     }
 
     .bandiera svg { display: block; width: 100%; height: 100%; }
@@ -157,7 +159,8 @@
 <body>
 
   <header class="barra">
-    <img src="Altavilla9.png" alt="Logo Hotel Altavilla Roma">
+    <!-- Se Altavilla9.png non viene trovato, prova in automatico Altavilla.png -->
+    <img src="Altavilla9.png" alt="Logo Hotel Altavilla Roma" onerror="this.onerror=null;this.src='Altavilla.png'">
     <h1>Hotel Altavilla9</h1>
   </header>
 
@@ -262,7 +265,7 @@
         </a>
       </li>
 
-      <!-- ARABO (Rappresentata con bandiera generica Emirati/Araba per semplicità visiva) -->
+      <!-- ARABO -->
       <li>
         <a href="Alta9arabo.html" hreflang="ar" lang="ar">
           <span class="bandiera" aria-hidden="true">
