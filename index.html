@@ -4,9 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Altavilla9 info</title>
-<link rel="icon" type="image/png" sizes="any" href="Altavilla9.png?v=3">
-<link rel="shortcut icon" type="image/png" href="Altavilla9.png?v=3">
-<link rel="apple-touch-icon" href="Altavilla9.png?v=3">
+<link rel="icon" type="image/png" href="Altavilla9.png?v=4">
+<link rel="apple-touch-icon" href="Altavilla9.png?v=4">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&display=swap">
@@ -357,6 +356,26 @@
         } catch (e) { }
       };
       img.src = m[1];
+    })();
+  </script>
+
+  <script>
+    /* Icona della scheda: viene rimessa ogni volta con un indirizzo nuovo, così il browser non usa quella vecchia in memoria.
+       Se Altavilla9.png non si trova, prova Altavilla.png */
+    (function () {
+      function metti(nome) {
+        document.querySelectorAll('link[rel~="icon"], link[rel="shortcut icon"]').forEach(function (l) { l.remove(); });
+        var l = document.createElement('link');
+        l.rel = 'icon';
+        l.type = 'image/png';
+        l.href = nome + '?t=' + Date.now();
+        l.onerror = function () { if (nome !== 'Altavilla.png') metti('Altavilla.png'); };
+        document.head.appendChild(l);
+      }
+      var t = new Image();
+      t.onload = function () { metti('Altavilla9.png'); };
+      t.onerror = function () { metti('Altavilla.png'); };
+      t.src = 'Altavilla9.png?t=' + Date.now();
     })();
   </script>
 
